@@ -1202,7 +1202,17 @@ class TestCustomHandlers(unittest.TestCase):
 # ---------------------------------------------------------------------------
 
 class TestAsync(unittest.TestCase):
+    """
+    Async tests that exercise the sync fallback path via the executor.
 
+    We force ``_HAS_AIOHTTP = False`` inside each test so that ``acomplete``
+    delegates to the sync path (which uses the patched ``urllib.request.urlopen``)
+    rather than trying to make real aiohttp calls. Native aiohttp behaviour
+    is covered by ``TestNativeAsync`` and ``TestConcurrentAsync`` with
+    dedicated mocks.
+    """
+
+    @patch("quantarion_router._HAS_AIOHTTP", False)
     @patch("urllib.request.urlopen")
     def test_acomplete_basic(self, mock_urlopen: MagicMock) -> None:
         mock_urlopen.return_value = _anthropic_response("Async hello")
@@ -1213,6 +1223,7 @@ class TestAsync(unittest.TestCase):
         self.assertTrue(result.success)
         self.assertEqual(result.content, "Async hello")
 
+    @patch("quantarion_router._HAS_AIOHTTP", False)
     @patch("urllib.request.urlopen")
     def test_acomplete_with_system(self, mock_urlopen: MagicMock) -> None:
         mock_urlopen.return_value = _anthropic_response("Pirate hello")
@@ -1222,6 +1233,7 @@ class TestAsync(unittest.TestCase):
         result = asyncio.run(router.acomplete("test", system="Be a pirate"))
         self.assertTrue(result.success)
 
+    @patch("quantarion_router._HAS_AIOHTTP", False)
     @patch("urllib.request.urlopen")
     def test_acomplete_with_messages(self, mock_urlopen: MagicMock) -> None:
         mock_urlopen.return_value = _anthropic_response("Multi async")
