@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "quantarion-router"
+version = "1.1.0"
+description = "Production-grade multi-provider LLM routing engine with fallback, circuit breaker, metrics, and native async."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Vlad M.", email = "vlad@quantarion.com" }
+]
+keywords = [
+    "llm", "ai", "routing", "openai", "anthropic", "fallback",
+    "circuit-breaker", "retry", "async", "quantarion",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
+]
+dependencies = []
+
+[project.optional-dependencies]
+async = ["aiohttp>=3.9"]
+dev = [
+    "pytest>=7.0",
+    "mypy>=1.0",
+    "aiohttp>=3.9",
+]
+
+[project.urls]
+Homepage = "https://quantarion.com"
+Repository = "https://github.com/quantarion-labs/quantarion-router"
+Changelog = "https://github.com/quantarion-labs/quantarion-router/blob/main/CHANGELOG.md"
+Issues = "https://github.com/quantarion-labs/quantarion-router/issues"
+
+[tool.setuptools]
+py-modules = ["quantarion_router"]
+
+[tool.mypy]
+strict = true
+python_version = "3.9"

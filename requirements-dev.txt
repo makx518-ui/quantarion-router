@@ -1,0 +1,6 @@
+pytest>=7.0
+mypy>=1.0
+ruff>=0.1.0
+
+# Optional: install for native async I/O (otherwise executor fallback is used)
+# aiohttp>=3.9
