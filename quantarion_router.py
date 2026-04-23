@@ -32,7 +32,7 @@ from dataclasses import dataclass
 from typing import Any, Callable, Dict, List, Optional, Sequence, Union
 
 try:
-    import aiohttp  # type: ignore[import-not-found]
+    import aiohttp  # type: ignore[import-not-found,unused-ignore]
     _HAS_AIOHTTP = True
 except ImportError:
     _HAS_AIOHTTP = False
